@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import math
+from operator import itemgetter
 
 def outlierCleaner(predictions, ages, net_worths):
     """
@@ -12,9 +14,15 @@ def outlierCleaner(predictions, ages, net_worths):
     """
     
     cleaned_data = []
+    for i in range (0, len(predictions)):
+		tup = (ages[i][0], net_worths[i][0], math.pow((net_worths[i] -  predictions[i]), 2))
+		cleaned_data.append(tup)
+    
 
     ### your code goes here
 
-    
-    return cleaned_data
+    print cleaned_data
+    cleaned_data = sorted(cleaned_data, key=itemgetter(2), reverse=False)
+    print cleaned_data
+    return cleaned_data[0:81]
 
